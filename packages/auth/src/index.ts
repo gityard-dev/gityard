@@ -48,5 +48,35 @@ export const sessionContract = {
   tokenLogging: "forbidden",
 } as const;
 
+export type EncryptedSecret = {
+  readonly ciphertext: string;
+  readonly keyId: string;
+  readonly algorithm: "local-envelope-placeholder" | "kms-envelope";
+};
+
+export type TokenEncryptionProvider = {
+  readonly keyId: string;
+  encrypt(plaintext: string): Promise<EncryptedSecret>;
+  decrypt(secret: EncryptedSecret): Promise<string>;
+};
+
+export function createLocalTokenEncryptionPlaceholder(keyId = "GITYARD_ENCRYPTION_KEY") {
+  return {
+    keyId,
+    async encrypt(plaintext: string) {
+      return {
+        ciphertext: `encrypted:${plaintext.length}`,
+        keyId,
+        algorithm: "local-envelope-placeholder",
+      } satisfies EncryptedSecret;
+    },
+    async decrypt(secret: EncryptedSecret) {
+      throw new Error(
+        `Decrypt is not implemented for ${secret.algorithm}; wire a real provider in I010.`,
+      );
+    },
+  } satisfies TokenEncryptionProvider;
+}
+
 export type UserPermission = z.infer<typeof userPermissionSchema>;
 export type AgentPermission = z.infer<typeof agentPermissionSchema>;

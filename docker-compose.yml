@@ -1,0 +1,149 @@
+services:
+  web:
+    build:
+      context: .
+      dockerfile: infra/docker/node.Dockerfile
+      args:
+        PACKAGE_FILTER: "@gityard/web"
+    command: ["corepack", "pnpm", "--filter", "@gityard/web", "dev"]
+    env_file: .env.example
+    ports:
+      - "3000:3000"
+    depends_on:
+      api:
+        condition: service_started
+
+  api:
+    build:
+      context: .
+      dockerfile: infra/docker/node.Dockerfile
+      args:
+        PACKAGE_FILTER: "@gityard/api"
+    command: ["corepack", "pnpm", "--filter", "@gityard/api", "dev"]
+    env_file: .env.example
+    ports:
+      - "4000:4000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      nats:
+        condition: service_started
+      temporal:
+        condition: service_started
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://localhost:4000/health').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  worker:
+    build:
+      context: .
+      dockerfile: infra/docker/node.Dockerfile
+      args:
+        PACKAGE_FILTER: "@gityard/worker"
+    command: ["corepack", "pnpm", "--filter", "@gityard/worker", "dev"]
+    env_file: .env.example
+    depends_on:
+      postgres:
+        condition: service_healthy
+      nats:
+        condition: service_started
+      temporal:
+        condition: service_started
+      meilisearch:
+        condition: service_started
+      minio:
+        condition: service_started
+
+  ai-worker:
+    build:
+      context: .
+      dockerfile: infra/docker/node.Dockerfile
+      args:
+        PACKAGE_FILTER: "@gityard/ai-worker"
+    command: ["corepack", "pnpm", "--filter", "@gityard/ai-worker", "dev"]
+    env_file: .env.example
+    depends_on:
+      postgres:
+        condition: service_healthy
+      nats:
+        condition: service_started
+
+  git-worker:
+    build:
+      context: .
+      dockerfile: infra/docker/git-worker.Dockerfile
+    env_file: .env.example
+    volumes:
+      - git_mirrors:/var/lib/gityard/mirrors
+    depends_on:
+      nats:
+        condition: service_started
+
+  postgres:
+    image: postgres:17
+    environment:
+      POSTGRES_USER: gityard
+      POSTGRES_PASSWORD: gityard
+      POSTGRES_DB: gityard
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U gityard -d gityard"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  nats:
+    image: nats:latest
+    command: ["-js"]
+    ports:
+      - "4222:4222"
+      - "8222:8222"
+
+  temporal:
+    image: temporalio/auto-setup:latest
+    ports:
+      - "7233:7233"
+
+  meilisearch:
+    image: getmeili/meilisearch:latest
+    environment:
+      MEILI_MASTER_KEY: gityard-local
+    ports:
+      - "7700:7700"
+    volumes:
+      - meilisearch:/meili_data
+
+  minio:
+    image: minio/minio:latest
+    command: server /data --console-address ":9001"
+    environment:
+      MINIO_ROOT_USER: gityard
+      MINIO_ROOT_PASSWORD: gityardpassword
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    volumes:
+      - minio:/data
+
+volumes:
+  git_mirrors:
+  postgres:
+  meilisearch:
+  minio:

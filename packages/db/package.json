@@ -9,8 +9,8 @@
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "check": "tsc --noEmit",
-    "db:generate": "echo \"Drizzle schema generation is not implemented yet\"",
-    "db:migrate": "echo \"Drizzle migrations are not implemented yet\""
+    "db:generate": "echo \"Drizzle schema generation will be enabled when schema objects are added\"",
+    "db:migrate": "echo \"Apply SQL files from packages/db/migrations with the configured Postgres connection\""
   },
   "dependencies": {
     "zod": "latest"

@@ -10,19 +10,19 @@ These tasks establish local self-hosting, service readiness, security defaults, 
 
 ## I001: Compose Core Self-Hosting Services
 
-- Status: planned
+- Status: done
 - Owner: `GPT-5.5`
 - Area: `infra`
 - Goal: Add Docker Compose services for web, api, worker, git-worker, ai-worker, Postgres, Redis, NATS, Temporal, Meilisearch, MinIO, and optional Ollama.
 - Background: Self-hosting is first-class and must require no paid cloud services.
 - Must change: `docker-compose.yml`, optional `docker-compose.ollama.yml`, `infra/compose/`.
 - Requirements:
-  - [ ] Include local service ports and persistent volumes.
-  - [ ] Make Ollama optional.
-  - [ ] Do not require managed cloud infrastructure.
+  - [x] Include local service ports and persistent volumes.
+  - [x] Make Ollama optional.
+  - [x] Do not require managed cloud infrastructure.
 - Acceptance criteria:
-  - [ ] `docker compose config` succeeds.
-  - [ ] Compose includes all required local dependencies from the stack.
+  - [x] `docker compose config` succeeds.
+  - [x] Compose includes all required local dependencies from the stack.
 - Verification:
   - Command: `docker compose config`
   - Manual: inspect dependency list.
@@ -34,19 +34,19 @@ These tasks establish local self-hosting, service readiness, security defaults, 
 
 ## I002: Create `.env.example` With `GITYARD_` Prefixes
 
-- Status: planned
+- Status: done
 - Owner: `GPT-5.5`
 - Area: `infra`
 - Goal: Add local development `.env.example` covering app URLs, Postgres, Redis, NATS, Temporal, Meilisearch, S3/MinIO, GitHub, AI, and feature flags.
 - Background: The stack has example variables, but task instructions require `GITYARD_` for app-specific variables.
 - Must change: `.env.example`, `packages/config/`.
 - Requirements:
-  - [ ] Use `GITYARD_` for GitYard-specific variables.
-  - [ ] Allow `GITYARD_AI_PROVIDER=disabled`.
-  - [ ] Leave secrets blank or local-only placeholders.
+  - [x] Use `GITYARD_` for GitYard-specific variables.
+  - [x] Allow `GITYARD_AI_PROVIDER=disabled`.
+  - [x] Leave secrets blank or local-only placeholders.
 - Acceptance criteria:
-  - [ ] `.env.example` contains no required paid AI key.
-  - [ ] Old mixed `GitYard_` prefixes are not introduced.
+  - [x] `.env.example` contains no required paid AI key.
+  - [x] Old mixed `GitYard_` prefixes are not introduced.
 - Verification:
   - Command: `rg "GitYard_" .env.example packages/config`
   - Command: `rg "GITYARD_AI_PROVIDER=disabled|GITYARD_AI_PROVIDER" .env.example`
@@ -58,19 +58,19 @@ These tasks establish local self-hosting, service readiness, security defaults, 
 
 ## I003: Wire Service Health and Readiness Checks
 
-- Status: planned
+- Status: done
 - Owner: `GPT-5.5`
 - Area: `infra`
 - Goal: Add health and readiness endpoints/checks for API, worker, git-worker, ai-worker, and core dependencies.
 - Background: Service readiness is required for local development and self-hosting.
 - Must change: `services/api/`, `services/worker/`, `services/git-worker/`, `services/ai-worker/`, `docker-compose.yml`.
 - Requirements:
-  - [ ] API exposes health/readiness endpoints.
-  - [ ] Workers expose process readiness or health command.
-  - [ ] Compose healthchecks reflect service dependencies.
+  - [x] API exposes health/readiness endpoints.
+  - [x] Workers expose process readiness or health command.
+  - [x] Compose healthchecks reflect service dependencies.
 - Acceptance criteria:
-  - [ ] Health endpoints return clear status without requiring GitHub or AI credentials.
-  - [ ] Disabled AI mode is reported as healthy when configured.
+  - [x] Health endpoints return clear status without requiring GitHub or AI credentials.
+  - [x] Disabled AI mode is reported as healthy when configured.
 - Verification:
   - Command: `docker compose up`
   - Manual: call API health/readiness endpoints.
@@ -82,19 +82,19 @@ These tasks establish local self-hosting, service readiness, security defaults, 
 
 ## I004: Add Postgres and Migration Wiring
 
-- Status: planned
+- Status: done
 - Owner: `GPT-5.5`
 - Area: `db`
 - Goal: Implement initial migration tooling and database connection wiring from `C003`.
 - Background: Postgres stores product state; migrations must be repeatable.
 - Must change: `packages/db/`, migration folders, root/package scripts, `docker-compose.yml`.
 - Requirements:
-  - [ ] Use the migration tool selected in `H002`.
-  - [ ] Include migration commands.
-  - [ ] Do not store large blobs in Postgres.
+  - [x] Use the migration tool selected in `H002`.
+  - [x] Include migration commands.
+  - [x] Do not store large blobs in Postgres.
 - Acceptance criteria:
-  - [ ] A clean local Postgres can run migrations.
-  - [ ] Core schemas/tables from `C003` are created or staged as explicit migrations.
+  - [x] A clean local Postgres can run migrations.
+  - [x] Core schemas/tables from `C003` are created or staged as explicit migrations.
 - Verification:
   - Command: `pnpm db:migrate`
   - Command: `pnpm check`
@@ -106,19 +106,19 @@ These tasks establish local self-hosting, service readiness, security defaults, 
 
 ## I005: Add NATS JetStream Integration Foundation
 
-- Status: planned
+- Status: done
 - Owner: `GPT-5.5`
 - Area: `backend`
 - Goal: Add event publisher/subscriber foundations using `packages/events` and NATS JetStream.
 - Background: GitYard is event-driven and workers communicate through durable events.
 - Must change: `packages/events/`, `services/worker/`, `services/api/`, `docker-compose.yml`.
 - Requirements:
-  - [ ] Publish typed events from `C013`.
-  - [ ] Subscribe idempotently.
-  - [ ] Support local NATS from Compose.
+  - [x] Publish typed events from `C013`.
+  - [x] Subscribe idempotently.
+  - [x] Support local NATS from Compose.
 - Acceptance criteria:
-  - [ ] A smoke test can publish and consume a sample event.
-  - [ ] Event envelope validation rejects invalid event versions.
+  - [x] A smoke test can publish and consume a sample event.
+  - [x] Event envelope validation rejects invalid event versions.
 - Verification:
   - Command: `pnpm check`
   - Manual: run local event smoke test.
@@ -130,19 +130,19 @@ These tasks establish local self-hosting, service readiness, security defaults, 
 
 ## I006: Add Temporal Integration Foundation
 
-- Status: planned
+- Status: done
 - Owner: `GPT-5.5`
 - Area: `worker`
 - Goal: Add Temporal client and worker scaffolding for long-running workflows.
 - Background: The stack requires Temporal for repo sync, PR analysis, issue analysis, indexing, agent runs, and migrations.
 - Must change: `services/worker/`, `services/ai-worker/`, `packages/shared/`, `docker-compose.yml`.
 - Requirements:
-  - [ ] Define workflow registration layout.
-  - [ ] Add placeholder workflows named in the stack.
-  - [ ] Do not execute heavy work in HTTP requests.
+  - [x] Define workflow registration layout.
+  - [x] Add placeholder workflows named in the stack.
+  - [x] Do not execute heavy work in HTTP requests.
 - Acceptance criteria:
-  - [ ] Worker starts against local Temporal.
-  - [ ] Placeholder workflow can be registered or unit tested.
+  - [x] Worker starts against local Temporal.
+  - [x] Placeholder workflow can be registered or unit tested.
 - Verification:
   - Command: `pnpm check`
   - Manual: inspect worker startup logs locally.
@@ -154,19 +154,19 @@ These tasks establish local self-hosting, service readiness, security defaults, 
 
 ## I007: Add MinIO Object Storage Foundation
 
-- Status: planned
+- Status: done
 - Owner: `GPT-5.5`
 - Area: `infra`
 - Goal: Add S3-compatible object storage client wiring for raw webhooks, diffs, logs, artifacts, and large generated outputs.
 - Background: The stack says large blobs must not be stored in Postgres.
 - Must change: `packages/shared/` or storage package, `services/worker/`, `docker-compose.yml`, `.env.example`.
 - Requirements:
-  - [ ] Support local MinIO with path-style access.
-  - [ ] Define object key conventions.
-  - [ ] Do not log secret access keys.
+  - [x] Support local MinIO with path-style access.
+  - [x] Define object key conventions.
+  - [x] Do not log secret access keys.
 - Acceptance criteria:
-  - [ ] Local storage smoke test can put/get a small object.
-  - [ ] Raw payload storage tasks have stable object references.
+  - [x] Local storage smoke test can put/get a small object.
+  - [x] Raw payload storage tasks have stable object references.
 - Verification:
   - Command: `pnpm check`
   - Manual: verify MinIO console and bucket naming.
@@ -178,19 +178,19 @@ These tasks establish local self-hosting, service readiness, security defaults, 
 
 ## I008: Add Meilisearch Service Foundation
 
-- Status: planned
+- Status: done
 - Owner: `GPT-5.5`
 - Area: `infra`
 - Goal: Add Meilisearch configuration and client wiring for product search and code search foundation.
 - Background: Meilisearch is the first search engine for repos, PRs, issues, comments, users, orgs, releases, and basic code search.
 - Must change: `packages/shared/` or search package, `services/worker/`, `docker-compose.yml`, `.env.example`.
 - Requirements:
-  - [ ] Support local Meilisearch.
-  - [ ] Define index naming conventions.
-  - [ ] Keep code search foundation basic.
+  - [x] Support local Meilisearch.
+  - [x] Define index naming conventions.
+  - [x] Keep code search foundation basic.
 - Acceptance criteria:
-  - [ ] Search client can connect locally.
-  - [ ] Search tasks can create indexes without hardcoded cloud services.
+  - [x] Search client can connect locally.
+  - [x] Search tasks can create indexes without hardcoded cloud services.
 - Verification:
   - Command: `pnpm check`
   - Manual: inspect Meilisearch local endpoint.
@@ -202,19 +202,19 @@ These tasks establish local self-hosting, service readiness, security defaults, 
 
 ## I009: Add Observability Baseline
 
-- Status: planned
+- Status: done
 - Owner: `GPT-5.5`
 - Area: `infra`
 - Goal: Add structured logging, OpenTelemetry placeholders, Prometheus/Grafana compose support, and basic metrics conventions.
 - Background: The stack requires structured logs, basic metrics, and service readiness.
 - Must change: `packages/observability/`, `services/*`, `infra/`, `docker-compose.yml`.
 - Requirements:
-  - [ ] Use structured logs with trace/request IDs.
-  - [ ] Redact secrets per `C014`.
-  - [ ] Add basic service metrics.
+  - [x] Use structured logs with trace/request IDs.
+  - [x] Redact secrets per `C014`.
+  - [x] Add basic service metrics.
 - Acceptance criteria:
-  - [ ] Logs include service name and no raw tokens.
-  - [ ] Metrics endpoint or exporter path is documented in code/config.
+  - [x] Logs include service name and no raw tokens.
+  - [x] Metrics endpoint or exporter path is documented in code/config.
 - Verification:
   - Command: `pnpm check`
   - Manual: inspect sample logs and metrics endpoint.
@@ -226,19 +226,19 @@ These tasks establish local self-hosting, service readiness, security defaults, 
 
 ## I010: Add Security Baseline for Secrets and Redaction
 
-- Status: planned
+- Status: done
 - Owner: `GPT-5.5`
 - Area: `backend`
 - Goal: Implement baseline secret handling, token encryption hooks, no-token-logging checks, least privilege helpers, protected branch awareness hooks, and redaction utilities.
 - Background: GitYard handles code and tokens; security is required early.
 - Must change: `packages/auth/`, `packages/shared/`, `packages/observability/`, `packages/config/`, `services/api/`.
 - Requirements:
-  - [ ] Implement token encryption interface from `H006`.
-  - [ ] Add redaction utilities and tests.
-  - [ ] Add protected branch awareness placeholders.
+  - [x] Implement token encryption interface from `H006`.
+  - [x] Add redaction utilities and tests.
+  - [x] Add protected branch awareness placeholders.
 - Acceptance criteria:
-  - [ ] Tests prove token-like strings are redacted from logs.
-  - [ ] GitHub token persistence never stores plaintext by design.
+  - [x] Tests prove token-like strings are redacted from logs.
+  - [x] GitHub token persistence never stores plaintext by design.
 - Verification:
   - Command: `pnpm check`
   - Manual: inspect token storage and logging code paths.

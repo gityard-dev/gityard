@@ -67,5 +67,22 @@ export const eventRules = {
   replayableWherePossible: true,
 } as const;
 
+export function parseEventEnvelope(input: unknown) {
+  return eventEnvelopeSchema.parse(input);
+}
+
+export function createEventSmokePayload() {
+  return eventEnvelopeSchema.parse({
+    id: "evt_smoke",
+    type: "repo.sync.requested",
+    version: 1,
+    timestamp: new Date(0).toISOString(),
+    actor: { type: "system", id: "contract-smoke" },
+    repository: { id: "repo_smoke" },
+    idempotencyKey: "repo_smoke:sync",
+    data: {},
+  });
+}
+
 export type EventSubject = z.infer<typeof eventSubjectSchema>;
 export type EventEnvelope = z.infer<typeof eventEnvelopeSchema>;

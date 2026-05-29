@@ -28,4 +28,36 @@ export const redactionContract = {
   tokenLogging: "forbidden",
 } as const;
 
+export function redactSecrets(value: unknown): unknown {
+  if (Array.isArray(value)) {
+    return value.map((item) => redactSecrets(item));
+  }
+
+  if (value && typeof value === "object") {
+    return Object.fromEntries(
+      Object.entries(value).map(([key, item]) => [
+        key,
+        redactionContract.forbiddenLogFields.some(
+          (field) => key.toLowerCase() === field.toLowerCase() || key.toLowerCase().includes(field),
+        )
+          ? redactionContract.replacement
+          : redactSecrets(item),
+      ]),
+    );
+  }
+
+  if (typeof value === "string" && /(?:gh[pousr]_|sk-|xox[baprs]-)/i.test(value)) {
+    return redactionContract.replacement;
+  }
+
+  return value;
+}
+
+export function createStructuredLog(input: StructuredLog): StructuredLog {
+  return structuredLogSchema.parse({
+    ...input,
+    metadata: redactSecrets(input.metadata),
+  });
+}
+
 export type StructuredLog = z.infer<typeof structuredLogSchema>;

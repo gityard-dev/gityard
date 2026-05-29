@@ -56,16 +56,16 @@ The plan uses phase and area files because GitYard is a platform with clear owne
 | C012 | Define project memory and decision records contract | GPT-5.5 | backend | done | C003 |
 | C013 | Define event schema package contract | GPT-5.5 | backend | done | C003 |
 | C014 | Define error model, audit model, and logging contract | GPT-5.5 | backend | done | C004, H006 |
-| I001 | Compose core self-hosting services | GPT-5.5 | infra | planned | F005 |
-| I002 | Create `.env.example` with `GITYARD_` prefixes | GPT-5.5 | infra | planned | F008, H004 |
-| I003 | Wire service health and readiness checks | GPT-5.5 | infra | planned | F005, I001 |
-| I004 | Add Postgres and migration wiring | GPT-5.5 | db | planned | C003, I001 |
-| I005 | Add NATS JetStream integration foundation | GPT-5.5 | backend | planned | C013, I001 |
-| I006 | Add Temporal integration foundation | GPT-5.5 | worker | planned | I001 |
-| I007 | Add MinIO object storage foundation | GPT-5.5 | infra | planned | I001 |
-| I008 | Add Meilisearch service foundation | GPT-5.5 | infra | planned | I001 |
-| I009 | Add observability baseline | GPT-5.5 | infra | planned | C014, I001 |
-| I010 | Add security baseline for secrets and redaction | GPT-5.5 | backend | planned | C014, H006 |
+| I001 | Compose core self-hosting services | GPT-5.5 | infra | done | F005 |
+| I002 | Create `.env.example` with `GITYARD_` prefixes | GPT-5.5 | infra | done | F008, H004 |
+| I003 | Wire service health and readiness checks | GPT-5.5 | infra | done | F005, I001 |
+| I004 | Add Postgres and migration wiring | GPT-5.5 | db | done | C003, I001 |
+| I005 | Add NATS JetStream integration foundation | GPT-5.5 | backend | done | C013, I001 |
+| I006 | Add Temporal integration foundation | GPT-5.5 | worker | done | I001 |
+| I007 | Add MinIO object storage foundation | GPT-5.5 | infra | done | I001 |
+| I008 | Add Meilisearch service foundation | GPT-5.5 | infra | done | I001 |
+| I009 | Add observability baseline | GPT-5.5 | infra | done | C014, I001 |
+| I010 | Add security baseline for secrets and redaction | GPT-5.5 | backend | done | C014, H006 |
 | G001 | Define GitHub integration modes contract | GPT-5.5 | github | planned | C004 |
 | G002 | Implement GitHub public read-only mode | GPT-5.5 | github | planned | G001 |
 | G003 | Implement GitHub PAT mode | GPT-5.5 | github | planned | G001, I010 |
@@ -131,13 +131,12 @@ The plan uses phase and area files because GitYard is a platform with clear owne
 
 ## Suggested Execution Order
 
-1. Build infra/security foundations `I001` through `I010`.
-2. Build GitHub and Git sync `G001` through `G012`.
-3. Build web foundation `U001` through `U010` in parallel with backend after contracts.
-4. Build PR, issue, and review workflows `P001` through `P012`.
-5. Build AI, agents, and context `A001` through `A010`.
-6. Build search, checks, releases, and notifications `S001` through `S010`.
-7. Run verification tasks `V001` through `V008`.
+1. Build GitHub and Git sync `G001` through `G012`.
+2. Build web foundation `U001` through `U010` in parallel with backend after contracts.
+3. Build PR, issue, and review workflows `P001` through `P012`.
+4. Build AI, agents, and context `A001` through `A010`.
+5. Build search, checks, releases, and notifications `S001` through `S010`.
+6. Run verification tasks `V001` through `V008`.
 
 ## Parallelizable Groups
 
