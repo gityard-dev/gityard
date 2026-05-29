@@ -2,6 +2,8 @@
 
 Claude-owned frontend tasks must use contracts and mocked data until integration tasks connect live APIs. They must not edit backend services, database packages, GitHub packages, or AI provider implementations.
 
+Frontend stack decision: GitYard uses a Vite-based React app with TanStack Router and TanStack Query. Do not use Next.js for the main app. Do not use TanStack Start unless a future Human decision explicitly changes the app/runtime boundary, because the canonical stack keeps the HTTP API in `services/api`.
+
 ## Shared Rules
 
 - Must read for every task: `AGENTS.md`, `README.md`, `docs/GITYARD_SPEC.md`, `docs/GITYARD_STACK.md`, `.plans/INDEX.md`, `.plans/DEPENDENCIES.md`, relevant contracts.
@@ -19,10 +21,13 @@ Claude-owned frontend tasks must use contracts and mocked data until integration
 - Must change: `apps/web/`, `packages/ui/`.
 - Requirements:
   - [ ] Use React, Vite, TanStack Router, TanStack Query, Tailwind, shadcn/ui-compatible primitives.
+  - [ ] Do not introduce Next.js.
+  - [ ] Do not introduce TanStack Start without a separate Human decision.
   - [ ] Include persistent shell for repo, PR, issue, review, agent, search, settings areas.
   - [ ] Avoid marketing landing-page structure.
 - Acceptance criteria:
   - [ ] `apps/web` starts locally and renders the app shell.
+  - [ ] `apps/web/package.json` uses Vite, React, TanStack Router, and TanStack Query rather than Next.js.
   - [ ] Navigation areas exist without requiring live backend data.
 - Dependencies:
   - Blocked by: `F001`

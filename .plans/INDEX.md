@@ -182,6 +182,7 @@ The plan uses phase and area files because GitYard is a platform with clear owne
 - `H004`: Use lowercase package scope `@gityard/*`; use `GITYARD_` for GitYard-specific environment variables.
 - `H005`: Limit native GitYard hosting for now to contracts, canonical-provider modeling, mirror foundations, and Git-compatible read foundations; defer native write-path hosting.
 - `H006`: Use `GITYARD_ENCRYPTION_KEY` locally, KMS-backed envelope encryption later, and no token logging in any mode.
+- Frontend: Use Vite + React + TanStack Router + TanStack Query for the main app. Do not use Next.js. Do not use TanStack Start unless a future Human decision changes the app/runtime boundary.
 
 ## Intentionally Not Planned As Versioned Releases
 
