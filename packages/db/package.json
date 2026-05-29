@@ -12,6 +12,9 @@
     "db:generate": "echo \"Drizzle schema generation is not implemented yet\"",
     "db:migrate": "echo \"Drizzle migrations are not implemented yet\""
   },
+  "dependencies": {
+    "zod": "latest"
+  },
   "devDependencies": {
     "typescript": "latest"
   }

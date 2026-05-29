@@ -56,18 +56,30 @@ importers:
         version: 6.0.3
 
   packages/agents:
+    dependencies:
+      zod:
+        specifier: latest
+        version: 4.4.3
     devDependencies:
       typescript:
         specifier: latest
         version: 6.0.3
 
   packages/ai:
+    dependencies:
+      zod:
+        specifier: latest
+        version: 4.4.3
     devDependencies:
       typescript:
         specifier: latest
         version: 6.0.3
 
   packages/auth:
+    dependencies:
+      zod:
+        specifier: latest
+        version: 4.4.3
     devDependencies:
       typescript:
         specifier: latest
@@ -87,18 +99,30 @@ importers:
         version: 6.0.3
 
   packages/db:
+    dependencies:
+      zod:
+        specifier: latest
+        version: 4.4.3
     devDependencies:
       typescript:
         specifier: latest
         version: 6.0.3
 
   packages/events:
+    dependencies:
+      zod:
+        specifier: latest
+        version: 4.4.3
     devDependencies:
       typescript:
         specifier: latest
         version: 6.0.3
 
   packages/git:
+    dependencies:
+      zod:
+        specifier: latest
+        version: 4.4.3
     devDependencies:
       typescript:
         specifier: latest
@@ -111,18 +135,30 @@ importers:
         version: 6.0.3
 
   packages/observability:
+    dependencies:
+      zod:
+        specifier: latest
+        version: 4.4.3
     devDependencies:
       typescript:
         specifier: latest
         version: 6.0.3
 
   packages/protocol:
+    dependencies:
+      zod:
+        specifier: latest
+        version: 4.4.3
     devDependencies:
       typescript:
         specifier: latest
         version: 6.0.3
 
   packages/shared:
+    dependencies:
+      zod:
+        specifier: latest
+        version: 4.4.3
     devDependencies:
       typescript:
         specifier: latest

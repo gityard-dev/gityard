@@ -42,20 +42,20 @@ The plan uses phase and area files because GitYard is a platform with clear owne
 | F008 | Add configuration package skeleton | GPT-5.5 | infra | done | F001, H004 |
 | F009 | Add local development bootstrap scripts | Either | infra | done | F001 |
 | F010 | Add contributor workflow placeholders | Either | docs | done | F001 |
-| C001 | Define external REST/OpenAPI contract baseline | GPT-5.5 | api | planned | H001, F006 |
-| C002 | Define frontend API client contract | GPT-5.5 | api | planned | C001 |
-| C003 | Define core database schema contract | GPT-5.5 | db | planned | H002 |
-| C004 | Define identity and permissions contract | GPT-5.5 | backend | planned | H003, C003 |
-| C005 | Define repository and mirror contract | GPT-5.5 | backend | planned | C003 |
-| C006 | Define PR, file change, and analysis contract | GPT-5.5 | api | planned | C003 |
-| C007 | Define issue and triage contract | GPT-5.5 | api | planned | C003 |
-| C008 | Define review and approval contract | GPT-5.5 | api | planned | C003 |
-| C009 | Define check run and release contract | GPT-5.5 | api | planned | C003 |
-| C010 | Define agent and agent run contract | GPT-5.5 | agents | planned | C004 |
-| C011 | Define AI generation and provider contract | GPT-5.5 | ai | planned | F008 |
-| C012 | Define project memory and decision records contract | GPT-5.5 | backend | planned | C003 |
-| C013 | Define event schema package contract | GPT-5.5 | backend | planned | C003 |
-| C014 | Define error model, audit model, and logging contract | GPT-5.5 | backend | planned | C004, H006 |
+| C001 | Define external REST/OpenAPI contract baseline | GPT-5.5 | api | done | H001, F006 |
+| C002 | Define frontend API client contract | GPT-5.5 | api | done | C001 |
+| C003 | Define core database schema contract | GPT-5.5 | db | done | H002 |
+| C004 | Define identity and permissions contract | GPT-5.5 | backend | done | H003, C003 |
+| C005 | Define repository and mirror contract | GPT-5.5 | backend | done | C003 |
+| C006 | Define PR, file change, and analysis contract | GPT-5.5 | api | done | C003 |
+| C007 | Define issue and triage contract | GPT-5.5 | api | done | C003 |
+| C008 | Define review and approval contract | GPT-5.5 | api | done | C003 |
+| C009 | Define check run and release contract | GPT-5.5 | api | done | C003 |
+| C010 | Define agent and agent run contract | GPT-5.5 | agents | done | C004 |
+| C011 | Define AI generation and provider contract | GPT-5.5 | ai | done | F008 |
+| C012 | Define project memory and decision records contract | GPT-5.5 | backend | done | C003 |
+| C013 | Define event schema package contract | GPT-5.5 | backend | done | C003 |
+| C014 | Define error model, audit model, and logging contract | GPT-5.5 | backend | done | C004, H006 |
 | I001 | Compose core self-hosting services | GPT-5.5 | infra | planned | F005 |
 | I002 | Create `.env.example` with `GITYARD_` prefixes | GPT-5.5 | infra | planned | F008, H004 |
 | I003 | Wire service health and readiness checks | GPT-5.5 | infra | planned | F005, I001 |
@@ -131,14 +131,13 @@ The plan uses phase and area files because GitYard is a platform with clear owne
 
 ## Suggested Execution Order
 
-1. Define contracts `C001` through `C014`.
-2. Build infra/security foundations `I001` through `I010`.
-3. Build GitHub and Git sync `G001` through `G012`.
-4. Build web foundation `U001` through `U010` in parallel with backend after contracts.
-5. Build PR, issue, and review workflows `P001` through `P012`.
-6. Build AI, agents, and context `A001` through `A010`.
-7. Build search, checks, releases, and notifications `S001` through `S010`.
-8. Run verification tasks `V001` through `V008`.
+1. Build infra/security foundations `I001` through `I010`.
+2. Build GitHub and Git sync `G001` through `G012`.
+3. Build web foundation `U001` through `U010` in parallel with backend after contracts.
+4. Build PR, issue, and review workflows `P001` through `P012`.
+5. Build AI, agents, and context `A001` through `A010`.
+6. Build search, checks, releases, and notifications `S001` through `S010`.
+7. Run verification tasks `V001` through `V008`.
 
 ## Parallelizable Groups
 

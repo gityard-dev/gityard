@@ -10,6 +10,9 @@
     "build": "tsc -p tsconfig.json",
     "check": "tsc --noEmit"
   },
+  "dependencies": {
+    "zod": "latest"
+  },
   "devDependencies": {
     "typescript": "latest"
   }
