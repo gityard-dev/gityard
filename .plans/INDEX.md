@@ -32,16 +32,16 @@ The plan uses phase and area files because GitYard is a platform with clear owne
 | H004 | Normalize naming and env casing | Human | infra | done | None |
 | H005 | Define source-of-truth transition boundaries | Human | backend | done | None |
 | H006 | Approve token encryption baseline | Human | backend | done | None |
-| F001 | Create monorepo workspace foundation | GPT-5.5 | infra | planned | H004 |
-| F002 | Lock static version 0.0.1 across packages | GPT-5.5 | infra | planned | F001 |
-| F003 | Add shared TypeScript configuration | GPT-5.5 | backend | planned | F001 |
-| F004 | Add Turbo and Biome tasks | GPT-5.5 | infra | planned | F001 |
-| F005 | Scaffold deployable service directories | GPT-5.5 | backend | planned | F001 |
-| F006 | Scaffold shared package directories | GPT-5.5 | backend | planned | F001 |
-| F007 | Scaffold Go git-worker module | GPT-5.5 | git | planned | F001 |
-| F008 | Add configuration package skeleton | GPT-5.5 | infra | planned | F001, H004 |
-| F009 | Add local development bootstrap scripts | Either | infra | planned | F001 |
-| F010 | Add contributor workflow placeholders | Either | docs | planned | F001 |
+| F001 | Create monorepo workspace foundation | GPT-5.5 | infra | done | H004 |
+| F002 | Lock static version 0.0.1 across packages | GPT-5.5 | infra | done | F001 |
+| F003 | Add shared TypeScript configuration | GPT-5.5 | backend | done | F001 |
+| F004 | Add Turbo and Biome tasks | GPT-5.5 | infra | done | F001 |
+| F005 | Scaffold deployable service directories | GPT-5.5 | backend | done | F001 |
+| F006 | Scaffold shared package directories | GPT-5.5 | backend | done | F001 |
+| F007 | Scaffold Go git-worker module | GPT-5.5 | git | done | F001 |
+| F008 | Add configuration package skeleton | GPT-5.5 | infra | done | F001, H004 |
+| F009 | Add local development bootstrap scripts | Either | infra | done | F001 |
+| F010 | Add contributor workflow placeholders | Either | docs | done | F001 |
 | C001 | Define external REST/OpenAPI contract baseline | GPT-5.5 | api | planned | H001, F006 |
 | C002 | Define frontend API client contract | GPT-5.5 | api | planned | C001 |
 | C003 | Define core database schema contract | GPT-5.5 | db | planned | H002 |
@@ -131,15 +131,14 @@ The plan uses phase and area files because GitYard is a platform with clear owne
 
 ## Suggested Execution Order
 
-1. Build foundation `F001` through `F010`.
-2. Define contracts `C001` through `C014`.
-3. Build infra/security foundations `I001` through `I010`.
-4. Build GitHub and Git sync `G001` through `G012`.
-5. Build web foundation `U001` through `U010` in parallel with backend after contracts.
-6. Build PR, issue, and review workflows `P001` through `P012`.
-7. Build AI, agents, and context `A001` through `A010`.
-8. Build search, checks, releases, and notifications `S001` through `S010`.
-9. Run verification tasks `V001` through `V008`.
+1. Define contracts `C001` through `C014`.
+2. Build infra/security foundations `I001` through `I010`.
+3. Build GitHub and Git sync `G001` through `G012`.
+4. Build web foundation `U001` through `U010` in parallel with backend after contracts.
+5. Build PR, issue, and review workflows `P001` through `P012`.
+6. Build AI, agents, and context `A001` through `A010`.
+7. Build search, checks, releases, and notifications `S001` through `S010`.
+8. Run verification tasks `V001` through `V008`.
 
 ## Parallelizable Groups
 

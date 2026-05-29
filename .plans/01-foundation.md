@@ -4,7 +4,7 @@ Foundation tasks create the repository structure required by `docs/GITYARD_STACK
 
 ## F001: Create Monorepo Workspace Foundation
 
-- Status: planned
+- Status: done
 - Owner: `GPT-5.5`
 - Area: `infra`
 - Goal: Add the pnpm/Turbo monorepo root and workspace folders without product behavior.
@@ -13,13 +13,13 @@ Foundation tasks create the repository structure required by `docs/GITYARD_STACK
 - Must change: `package.json`, `pnpm-workspace.yaml`, `turbo.json`, `apps/`, `services/`, `packages/`, `infra/`, `scripts/`.
 - Must not change: `docs/`, `.plans/`, `LICENSE`, product implementation beyond empty scaffolds.
 - Requirements:
-  - [ ] Use one monorepo, not separate repos.
-  - [ ] Include app, service, package, infra, and scripts directories.
-  - [ ] Preserve static version `0.0.1`.
+  - [x] Use one monorepo, not separate repos.
+  - [x] Include app, service, package, infra, and scripts directories.
+  - [x] Preserve static version `0.0.1`.
 - Acceptance criteria:
-  - [ ] `pnpm-workspace.yaml` includes `apps/*`, `services/*`, and `packages/*`.
-  - [ ] Root `package.json` is private and versioned `0.0.1`.
-  - [ ] No release, beta, MVP, v0.1, or v1 scripts are created.
+  - [x] `pnpm-workspace.yaml` includes `apps/*`, `services/*`, and `packages/*`.
+  - [x] Root `package.json` is private and versioned `0.0.1`.
+  - [x] No release, beta, MVP, v0.1, or v1 scripts are created.
 - Verification:
   - Command: `pnpm install`
   - Command: `pnpm --version`
@@ -33,7 +33,7 @@ Foundation tasks create the repository structure required by `docs/GITYARD_STACK
 
 ## F002: Lock Static Version 0.0.1 Across Packages
 
-- Status: planned
+- Status: done
 - Owner: `GPT-5.5`
 - Area: `infra`
 - Goal: Ensure every package scaffold uses version `0.0.1` and no versioned release plan exists.
@@ -42,11 +42,11 @@ Foundation tasks create the repository structure required by `docs/GITYARD_STACK
 - Must change: `package.json`, `apps/*/package.json`, `services/*/package.json`, `packages/*/package.json`.
 - Must not change: source code behavior, docs outside package metadata.
 - Requirements:
-  - [ ] Set all package versions to `0.0.1`.
-  - [ ] Add no release scripts or release planning language.
+  - [x] Set all package versions to `0.0.1`.
+  - [x] Add no release scripts or release planning language.
 - Acceptance criteria:
-  - [ ] A repository search finds package versions only at `0.0.1`.
-  - [ ] There are no `v0.1`, `v1`, `beta`, `launch`, or `MVP` package scripts.
+  - [x] A repository search finds package versions only at `0.0.1`.
+  - [x] There are no `v0.1`, `v1`, `beta`, `launch`, or `MVP` package scripts.
 - Verification:
   - Command: `rg '"version": "0.0.1"' package.json apps services packages`
   - Command: `rg -i "mvp|beta|launch|v0\\.1|v1" package.json apps services packages`
@@ -60,7 +60,7 @@ Foundation tasks create the repository structure required by `docs/GITYARD_STACK
 
 ## F003: Add Shared TypeScript Configuration
 
-- Status: planned
+- Status: done
 - Owner: `GPT-5.5`
 - Area: `backend`
 - Goal: Add root and package TypeScript configs for TypeScript apps, services, and packages.
@@ -69,12 +69,12 @@ Foundation tasks create the repository structure required by `docs/GITYARD_STACK
 - Must change: `tsconfig.json`, `packages/config/`, package-level `tsconfig.json` files.
 - Must not change: frontend components, API behavior, database schema.
 - Requirements:
-  - [ ] Add strict TypeScript defaults.
-  - [ ] Support workspace package imports.
-  - [ ] Keep generated outputs out of source directories.
+  - [x] Add strict TypeScript defaults.
+  - [x] Support workspace package imports.
+  - [x] Keep generated outputs out of source directories.
 - Acceptance criteria:
-  - [ ] `pnpm check` can typecheck scaffold packages once scripts exist.
-  - [ ] TypeScript config does not assume Next.js.
+  - [x] `pnpm check` can typecheck scaffold packages once scripts exist.
+  - [x] TypeScript config does not assume Next.js.
 - Verification:
   - Command: `pnpm check`
   - Manual: inspect config for React/Vite compatibility and service compatibility.
@@ -87,7 +87,7 @@ Foundation tasks create the repository structure required by `docs/GITYARD_STACK
 
 ## F004: Add Turbo and Biome Tasks
 
-- Status: planned
+- Status: done
 - Owner: `GPT-5.5`
 - Area: `infra`
 - Goal: Add build, check, lint, and format scripts using Turbo and Biome.
@@ -96,12 +96,12 @@ Foundation tasks create the repository structure required by `docs/GITYARD_STACK
 - Must change: `package.json`, `turbo.json`, `biome.json`, package scripts.
 - Must not change: product behavior, docs outside `.plans/`.
 - Requirements:
-  - [ ] Root scripts include `dev`, `build`, `check`, `lint`, `format`.
-  - [ ] Biome handles formatting and linting.
-  - [ ] Turbo pipelines are scoped and cacheable.
+  - [x] Root scripts include `dev`, `build`, `check`, `lint`, `format`.
+  - [x] Biome handles formatting and linting.
+  - [x] Turbo pipelines are scoped and cacheable.
 - Acceptance criteria:
-  - [ ] `pnpm lint` runs Biome.
-  - [ ] `pnpm build` and `pnpm check` route through Turbo.
+  - [x] `pnpm lint` runs Biome.
+  - [x] `pnpm build` and `pnpm check` route through Turbo.
 - Verification:
   - Command: `pnpm lint`
   - Command: `pnpm check`
@@ -115,7 +115,7 @@ Foundation tasks create the repository structure required by `docs/GITYARD_STACK
 
 ## F005: Scaffold Deployable Service Directories
 
-- Status: planned
+- Status: done
 - Owner: `GPT-5.5`
 - Area: `backend`
 - Goal: Create service scaffolds for `api`, `worker`, `git-worker`, and `ai-worker`.
@@ -124,12 +124,12 @@ Foundation tasks create the repository structure required by `docs/GITYARD_STACK
 - Must change: `services/api/`, `services/worker/`, `services/git-worker/`, `services/ai-worker/`.
 - Must not change: `apps/web/`, feature packages except import placeholders.
 - Requirements:
-  - [ ] API service scaffold targets the framework selected in `H001`.
-  - [ ] Worker and AI worker have minimal entrypoints.
-  - [ ] Go git-worker remains Go-owned.
+  - [x] API service scaffold targets the framework selected in `H001`.
+  - [x] Worker and AI worker have minimal entrypoints.
+  - [x] Go git-worker remains Go-owned.
 - Acceptance criteria:
-  - [ ] Each service has package/module metadata and a health-friendly entrypoint placeholder.
-  - [ ] No heavy work is implemented in API request handlers.
+  - [x] Each service has package/module metadata and a health-friendly entrypoint placeholder.
+  - [x] No heavy work is implemented in API request handlers.
 - Verification:
   - Command: `pnpm check`
   - Command: `go test ./...` from `services/git-worker` after `F007`
@@ -143,7 +143,7 @@ Foundation tasks create the repository structure required by `docs/GITYARD_STACK
 
 ## F006: Scaffold Shared Package Directories
 
-- Status: planned
+- Status: done
 - Owner: `GPT-5.5`
 - Area: `backend`
 - Goal: Create shared package scaffolds for config, db, events, github, git, ai, agents, protocol, auth, shared, observability, and ui.
@@ -152,12 +152,12 @@ Foundation tasks create the repository structure required by `docs/GITYARD_STACK
 - Must change: `packages/*/package.json`, `packages/*/src/`, `packages/ui/`.
 - Must not change: deployable service implementation, `apps/web` feature UI.
 - Requirements:
-  - [ ] Use scoped package names from `H004`.
-  - [ ] Keep package exports minimal.
-  - [ ] Include no hardcoded AI provider.
+  - [x] Use scoped package names from `H004`.
+  - [x] Keep package exports minimal.
+  - [x] Include no hardcoded AI provider.
 - Acceptance criteria:
-  - [ ] All required package directories exist.
-  - [ ] Workspace can resolve package imports.
+  - [x] All required package directories exist.
+  - [x] Workspace can resolve package imports.
 - Verification:
   - Command: `pnpm check`
   - Manual: inspect package list against stack document.
@@ -170,7 +170,7 @@ Foundation tasks create the repository structure required by `docs/GITYARD_STACK
 
 ## F007: Scaffold Go Git-Worker Module
 
-- Status: planned
+- Status: done
 - Owner: `GPT-5.5`
 - Area: `git`
 - Goal: Add the Go module and directory structure for `services/git-worker`.
@@ -179,12 +179,12 @@ Foundation tasks create the repository structure required by `docs/GITYARD_STACK
 - Must change: `services/git-worker/go.mod`, `services/git-worker/cmd/`, `services/git-worker/internal/`.
 - Must not change: TypeScript services, frontend, database migrations.
 - Requirements:
-  - [ ] Create `cmd/gityard-git-worker/main.go`.
-  - [ ] Create internal packages for git, mirror, diff, and events.
-  - [ ] Use no paid services.
+  - [x] Create `cmd/gityard-git-worker/main.go`.
+  - [x] Create internal packages for git, mirror, diff, and events.
+  - [x] Use no paid services.
 - Acceptance criteria:
-  - [ ] `go test ./...` passes in `services/git-worker`.
-  - [ ] The service does not assume GitHub as the only future provider.
+  - [x] `go test ./...` passes in `services/git-worker`.
+  - [x] The service does not assume GitHub as the only future provider.
 - Verification:
   - Command: `go test ./...`
   - Manual: inspect package names and import paths.
@@ -197,7 +197,7 @@ Foundation tasks create the repository structure required by `docs/GITYARD_STACK
 
 ## F008: Add Configuration Package Skeleton
 
-- Status: planned
+- Status: done
 - Owner: `GPT-5.5`
 - Area: `infra`
 - Goal: Add typed configuration loading and validation skeleton using `GITYARD_` prefixes for app-specific env vars.
@@ -206,12 +206,12 @@ Foundation tasks create the repository structure required by `docs/GITYARD_STACK
 - Must change: `packages/config/`, service imports where needed.
 - Must not change: `.env.example` except if paired with `I002`, product feature behavior.
 - Requirements:
-  - [ ] Validate required local-service URLs.
-  - [ ] Support AI provider `disabled`, `ollama`, and OpenAI-compatible configuration names.
-  - [ ] Do not require paid AI keys.
+  - [x] Validate required local-service URLs.
+  - [x] Support AI provider `disabled`, `ollama`, and OpenAI-compatible configuration names.
+  - [x] Do not require paid AI keys.
 - Acceptance criteria:
-  - [ ] `GITYARD_AI_PROVIDER=disabled` validates without API keys.
-  - [ ] Config package rejects unknown required production-critical settings with clear messages.
+  - [x] `GITYARD_AI_PROVIDER=disabled` validates without API keys.
+  - [x] Config package rejects unknown required production-critical settings with clear messages.
 - Verification:
   - Command: `pnpm --filter <config-package> check`
   - Manual: inspect env names for `GITYARD_` prefix.
@@ -224,7 +224,7 @@ Foundation tasks create the repository structure required by `docs/GITYARD_STACK
 
 ## F009: Add Local Development Bootstrap Scripts
 
-- Status: planned
+- Status: done
 - Owner: `Either`
 - Area: `infra`
 - Goal: Add scripts that prepare local development without requiring cloud services.
@@ -233,12 +233,12 @@ Foundation tasks create the repository structure required by `docs/GITYARD_STACK
 - Must change: `scripts/`, root `package.json`.
 - Must not change: feature implementation, docs outside `.plans/`.
 - Requirements:
-  - [ ] Add setup/check-env/dev script placeholders.
-  - [ ] Use local Docker Compose dependencies.
-  - [ ] Do not require paid AI or cloud credentials.
+  - [x] Add setup/check-env/dev script placeholders.
+  - [x] Use local Docker Compose dependencies.
+  - [x] Do not require paid AI or cloud credentials.
 - Acceptance criteria:
-  - [ ] A fresh checkout has discoverable local setup commands.
-  - [ ] Scripts fail clearly when Docker or required env values are missing.
+  - [x] A fresh checkout has discoverable local setup commands.
+  - [x] Scripts fail clearly when Docker or required env values are missing.
 - Verification:
   - Command: `pnpm check`
   - Command: `pnpm docker:up`
@@ -252,7 +252,7 @@ Foundation tasks create the repository structure required by `docs/GITYARD_STACK
 
 ## F010: Add Contributor Workflow Placeholders
 
-- Status: planned
+- Status: done
 - Owner: `Either`
 - Area: `docs`
 - Goal: Add placeholders or tasks for contributor workflow docs without creating docs outside `.plans/` in this planning task.
@@ -261,11 +261,11 @@ Foundation tasks create the repository structure required by `docs/GITYARD_STACK
 - Must change: future implementation may change `docs/` and `README.md`; this planning task only records allowed future areas.
 - Must not change: product code during docs-only work.
 - Requirements:
-  - [ ] Plan future setup, contributing, self-hosting, GitHub App, AI provider, agent, and events docs.
-  - [ ] Keep docs aligned with canonical docs.
+  - [x] Plan future setup, contributing, self-hosting, GitHub App, AI provider, agent, and events docs.
+  - [x] Keep docs aligned with canonical docs.
 - Acceptance criteria:
-  - [ ] `V007` has a concrete list of future docs tasks to create when implementation exists.
-  - [ ] No docs outside `.plans/` are created by this planning run.
+  - [x] `V007` has a concrete list of future docs tasks to create when implementation exists.
+  - [x] No docs outside `.plans/` are created by this planning run.
 - Verification:
   - Command: `git diff -- .plans`
   - Manual: confirm future docs are tasks, not new docs files.
