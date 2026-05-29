@@ -4,33 +4,35 @@
 
 planned
 
+Allowed values: `planned`, `ready`, `blocked`, `in-progress`, `needs-review`, `done`.
+
 ## Owner
 
 Choose one:
 
-- GPT
-- Claude
-- Either
-- Human
+- `GPT-5.5`
+- `Claude`
+- `Either`
+- `Human`
 
 ## Area
 
 Choose one primary area:
 
-- frontend
-- backend
-- worker
-- infra
-- docs
-- design
-- integration
-- testing
-- ai
-- agents
-- github
-- git
-- db
-- api
+- `frontend`
+- `backend`
+- `worker`
+- `infra`
+- `docs`
+- `design`
+- `integration`
+- `testing`
+- `ai`
+- `agents`
+- `github`
+- `git`
+- `db`
+- `api`
 
 ## Goal
 
@@ -38,34 +40,23 @@ Describe the exact outcome of this task.
 
 ## Background
 
-Explain why this task exists and how it fits into GitYard.
-
-Keep this short. Link to larger docs instead of copying them.
+Explain why this task exists and how it fits into GitYard. Link to canonical docs instead of copying them.
 
 ## Must read
 
-List only the files required for this task.
-
 - `AGENTS.md`
 - `README.md`
-- `docs/SPEC.md`
-- `docs/STACK.md`
-
-Add task-specific files here:
-
-- `path/to/file`
+- `docs/GITYARD_SPEC.md`
+- `docs/GITYARD_STACK.md`
+- task-specific files or contracts
 
 ## Must change
 
-List files or folders this task is allowed to change.
-
-- `path/to/file-or-folder`
+- files or folders this task is allowed to change
 
 ## Must not change
 
-List files or folders this task should not touch.
-
-- `path/to/file-or-folder`
+- files or folders this task must not touch
 
 ## Requirements
 
@@ -75,7 +66,7 @@ List files or folders this task should not touch.
 
 ## Acceptance criteria
 
-These must be observable and checkable.
+Use observable checks.
 
 - [ ] Acceptance criterion 1
 - [ ] Acceptance criterion 2
@@ -83,33 +74,36 @@ These must be observable and checkable.
 
 ## Verification
 
-Commands to run:
+Commands:
 
 ```bash
-# example
 pnpm check
-````
+```
 
 Manual checks:
 
-* [ ] Manual check 1
-* [ ] Manual check 2
+- [ ] Manual check 1
+- [ ] Manual check 2
 
 ## Dependencies
 
 Blocked by:
 
-* None
+- None
 
 Blocks:
 
-* None
+- None
 
-## Notes
+Can run in parallel with:
 
-Add constraints, edge cases, or implementation notes here.
+- task IDs or groups
 
-## Completion report
+## Parallelization notes
+
+State whether this task can run concurrently and which file boundaries prevent overlap.
+
+## Completion report format
 
 When done, respond with:
 
@@ -124,7 +118,7 @@ When done, respond with:
 
 ## Verification run
 
-- `<command>` — passed/failed/not run
+- `<command>` - passed/failed/not run
 
 ## Acceptance criteria
 
@@ -134,4 +128,34 @@ When done, respond with:
 ## Known gaps
 
 - None
+```
+
+## Compact Task Record
+
+Plan files may use this compact format when they contain many tasks. Every compact task must still include all required fields:
+
+```md
+## GY-000: Task title
+
+- Status: planned
+- Owner: `Either`
+- Area: `docs`
+- Goal: Exact outcome.
+- Background: Why this exists and which source documents define it.
+- Must read: `AGENTS.md`, `README.md`, `docs/GITYARD_SPEC.md`, `docs/GITYARD_STACK.md`, task-specific files.
+- Must change: `allowed/path`
+- Must not change: unrelated paths.
+- Requirements:
+  - [ ] Requirement 1.
+- Acceptance criteria:
+  - [ ] Observable result 1.
+- Verification:
+  - Command: `pnpm check`
+  - Manual: check something concrete.
+- Dependencies:
+  - Blocked by: None
+  - Blocks: `GY-001`
+  - Can run in parallel with: `GY-010`
+- Parallelization notes: File boundaries and sequencing notes.
+- Completion report format: Use the standard completion report from `.plans/TEMPLATE.md`.
 ```

@@ -2,13 +2,12 @@
 
 This folder contains implementation plans for GitYard.
 
-Plans are for agent-driven development. They break large milestones into scoped, verifiable tasks that can be assigned to different agents without overlap.
+Plans are for agent-driven development. They break large phases into scoped, verifiable tasks that can be assigned to different agents without overlap.
 
 ## Purpose
 
 Use `.plans/` to define:
 
-- milestones
 - implementation phases
 - task breakdowns
 - dependencies
@@ -18,125 +17,108 @@ Use `.plans/` to define:
 
 This folder is not product documentation. Product documentation belongs in `docs/`.
 
-## Key project documents
+## Key Project Documents
 
-Agents should use these documents as needed:
+Agents should use these canonical documents:
 
-- `README.md` — project overview
-- `docs/SPEC.md` — product direction
-- `docs/STACK.md` — technical architecture
-- `ROADMAP.md` — public roadmap
-- `AGENTS.md` — global agent rules
+- `README.md` - project overview
+- `docs/GITYARD_SPEC.md` - product direction
+- `docs/GITYARD_STACK.md` - technical architecture
+- `AGENTS.md` - global agent rules
 
-## Planning rules
+Do not assume `docs/SPEC.md`, `docs/STACK.md`, `ROADMAP.md`, or other docs exist.
+
+## Planning Rules
 
 - Keep tasks small and reviewable.
 - Do not combine unrelated areas in one task.
 - Split backend and frontend work unless the task is explicitly an integration task.
-- Every feature should have a contract before parallel implementation work.
+- Every major feature should have a contract before parallel implementation work.
 - Every task must include acceptance criteria.
 - Every task must include verification steps.
-- Every milestone should end with an integration or verification task.
+- Every phase should end with integration or verification tasks.
 - Do not create tasks that require multiple agents to edit the same files at the same time.
 - Do not introduce paid AI as a requirement.
 - Preserve self-hosting and local development.
+- Preserve no-AI mode and local AI support.
+- Keep GitHub as an initial integration, not the permanent source of truth.
+- Keep the project version at `0.0.1` until the maintainer decides it is stable.
 
-## Recommended task flow
+## Recommended Task Flow
 
 For larger features, split work like this:
 
-1. **Contract** — define data shape, API contract, events, or expected behavior.
-2. **Backend** — implement services, workers, database, API, or integrations.
-3. **Frontend** — implement UI using the contract or mocked data.
-4. **Integration** — connect frontend, backend, workers, and state.
-5. **Verification** — test the complete flow and document gaps.
+1. **Contract** - define data shape, API contract, events, expected behavior, mocked frontend data, permissions, error model, or configuration shape.
+2. **Backend** - implement services, workers, database, API, integrations, or infrastructure.
+3. **Frontend** - implement UI using the contract or mocked data.
+4. **Integration** - connect frontend, backend, workers, and state.
+5. **Verification** - test the complete flow and document gaps.
 
-Example:
-
-```txt
-[contract] Define pull request overview API
-[backend] Implement pull request sync and API
-[frontend] Build pull request overview page
-[integration] Connect pull request page to live API
-[verification] Verify pull request overview flow
-````
-
-## Agent ownership
+## Agent Ownership
 
 Use these owner labels:
 
-* `GPT-5.5` — backend, services, scaffolding, data models, workers, infra, contracts
-* `Claude` — UI, layout, interaction design, components, frontend states
-* `Either` — docs, integration, cleanup, simple tests
-* `Human` — product decisions, naming, scope changes, final review
+- `GPT-5.5` - scaffolding, backend, services, APIs, database, workers, GitHub integration, Git integration, AI providers, agents, infra, contracts, and architecture.
+- `Claude` - frontend, UI, layout, interaction design, React components, loading states, empty states, responsive behavior, and visual polish.
+- `Either` - docs, integration, verification, cleanup, simple tests, and small cross-cutting work.
+- `Human` - product decisions, scope decisions, naming, security judgment, and final approval.
 
-These are guidelines, not strict rules. The task itself is the source of truth.
+The task itself is the source of truth.
 
-## Area labels
+## Area Labels
 
 Use one primary area per task:
 
-* `frontend`
-* `backend`
-* `worker`
-* `infra`
-* `docs`
-* `design`
-* `integration`
-* `testing`
-* `ai`
-* `agents`
-* `github`
-* `git`
-* `db`
-* `api`
+- `frontend`
+- `backend`
+- `worker`
+- `infra`
+- `docs`
+- `design`
+- `integration`
+- `testing`
+- `ai`
+- `agents`
+- `github`
+- `git`
+- `db`
+- `api`
 
-## Task files
+## Task Files
 
-Task files should use `.plans/TEMPLATE.md`.
+Task files should use `.plans/TEMPLATE.md`. Each task must be independently executable and verifiable.
 
-Recommended naming:
+The active plan structure is listed in `.plans/INDEX.md`.
 
-```txt
-.plans/0001-foundation.md
-.plans/0002-repository-sync.md
-.plans/0003-pull-requests.md
-.plans/0004-issues.md
-.plans/0005-ai-providers.md
-.plans/0006-agents.md
-```
-
-Each plan file can contain multiple tasks, but each task must be independently executable and verifiable.
-
-## Task status
+## Task Status
 
 Use these statuses:
 
-* `planned`
-* `ready`
-* `blocked`
-* `in-progress`
-* `needs-review`
-* `done`
+- `planned`
+- `ready`
+- `blocked`
+- `in-progress`
+- `needs-review`
+- `done`
 
-## Completion rules
+## Completion Rules
 
 A task is not done unless:
 
-* the implementation matches the task;
-* acceptance criteria are checked;
-* verification steps were run;
-* unrelated files were not changed;
-* known gaps are documented;
-* follow-up tasks are created when needed.
+- the implementation matches the task;
+- acceptance criteria are checked;
+- verification steps were run;
+- unrelated files were not changed;
+- known gaps are documented;
+- follow-up tasks are created when needed.
 
-## When to stop
+## When To Stop
 
 Stop and ask for clarification if:
 
-* the task conflicts with `docs/SPEC.md`;
-* the task conflicts with `docs/STACK.md`;
-* required files or contracts are missing;
-* implementation would require changing unrelated areas;
-* a new dependency seems necessary but was not requested;
-* the task is too broad to complete safely.
+- the task conflicts with `docs/GITYARD_SPEC.md`;
+- the task conflicts with `docs/GITYARD_STACK.md`;
+- required files or contracts are missing;
+- implementation would require changing unrelated areas;
+- a new dependency seems necessary but was not requested;
+- the task is too broad to complete safely.
