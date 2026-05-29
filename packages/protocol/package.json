@@ -1,0 +1,16 @@
+{
+  "name": "@gityard/protocol",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "check": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "typescript": "latest"
+  }
+}

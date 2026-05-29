@@ -8,13 +8,13 @@ Foundation tasks create the repository structure required by `docs/GITYARD_STACK
 - Owner: `GPT-5.5`
 - Area: `infra`
 - Goal: Add the pnpm/Turbo monorepo root and workspace folders without product behavior.
-- Background: The stack requires one monorepo with `apps`, `services`, `packages`, `infra`, `examples`, and scripts.
+- Background: The stack requires one monorepo with `apps`, `services`, `packages`, `infra`, and scripts. Runnable examples are deferred until there are real self-hosting and provider recipes to maintain.
 - Must read: `AGENTS.md`, `README.md`, `docs/GITYARD_SPEC.md`, `docs/GITYARD_STACK.md`, `.plans/INDEX.md`, `.plans/DEPENDENCIES.md`.
-- Must change: `package.json`, `pnpm-workspace.yaml`, `turbo.json`, `apps/`, `services/`, `packages/`, `infra/`, `examples/`, `scripts/`.
+- Must change: `package.json`, `pnpm-workspace.yaml`, `turbo.json`, `apps/`, `services/`, `packages/`, `infra/`, `scripts/`.
 - Must not change: `docs/`, `.plans/`, `LICENSE`, product implementation beyond empty scaffolds.
 - Requirements:
   - [ ] Use one monorepo, not separate repos.
-  - [ ] Include app, service, package, infra, examples, and scripts directories.
+  - [ ] Include app, service, package, infra, and scripts directories.
   - [ ] Preserve static version `0.0.1`.
 - Acceptance criteria:
   - [ ] `pnpm-workspace.yaml` includes `apps/*`, `services/*`, and `packages/*`.

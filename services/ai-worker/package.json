@@ -1,0 +1,19 @@
+{
+  "name": "@gityard/ai-worker",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "tsx src/index.ts",
+    "build": "tsc -p tsconfig.json",
+    "check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@gityard/ai": "workspace:*",
+    "@gityard/config": "workspace:*"
+  },
+  "devDependencies": {
+    "tsx": "latest",
+    "typescript": "latest"
+  }
+}

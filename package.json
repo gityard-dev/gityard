@@ -1,0 +1,28 @@
+{
+  "name": "gityard",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@9.0.0",
+  "scripts": {
+    "dev": "turbo dev",
+    "build": "turbo build",
+    "check": "turbo check",
+    "lint": "biome check .",
+    "format": "biome format --write .",
+    "setup": "tsx scripts/setup.ts",
+    "check-env": "tsx scripts/check-env.ts",
+    "local:dev": "tsx scripts/dev.ts",
+    "db:generate": "pnpm --filter @gityard/db db:generate",
+    "db:migrate": "pnpm --filter @gityard/db db:migrate",
+    "docker:up": "docker compose up",
+    "docker:down": "docker compose down"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "latest",
+    "@types/node": "latest",
+    "tsx": "latest",
+    "turbo": "latest",
+    "typescript": "latest"
+  }
+}
